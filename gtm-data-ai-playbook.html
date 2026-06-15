@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newronium — Data & AI GTM Playbook</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1c1c28;
+      --border: #2a2a3d;
+      --accent: #6c63ff;
+      --accent2: #00d4ff;
+      --accent3: #ff6b6b;
+      --accent4: #51cf66;
+      --text: #e8e8f0;
+      --muted: #888899;
+      --tag-bg: #1e1e30;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── HEADER ─── */
+    .hero {
+      background: linear-gradient(135deg, #0a0a1a 0%, #12103a 50%, #0a1520 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 40px 48px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.4);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #fff 0%, var(--accent2) 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 32px;
+      font-size: 16px;
+    }
+    .hero-metrics {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-metric {
+      text-align: center;
+    }
+    .hero-metric .num {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent2);
+    }
+    .hero-metric .label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    /* ─── CARDS ─── */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card p, .card li { color: var(--muted); font-size: 14px; }
+    .card ul { padding-left: 18px; }
+    .card ul li { margin-bottom: 5px; }
+    .card .icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    /* ─── TOOL CARDS ─── */
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .tool-card .tool-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .tool-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .tool-card .role {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .tool-card p { font-size: 13px; color: var(--muted); }
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 11px;
+      color: var(--muted);
+      margin: 2px;
+    }
+
+    /* ─── WORKFLOW ─── */
+    .workflow { display: flex; flex-direction: column; gap: 0; }
+    .workflow-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .workflow-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 44px;
+      width: 2px;
+      height: calc(100% + 0px);
+      background: linear-gradient(var(--accent), var(--border));
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .step-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .step-body h4 { font-weight: 700; margin-bottom: 6px; }
+    .step-body p { color: var(--muted); font-size: 14px; }
+    .step-body .tools-used {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    /* ─── SEQUENCE ─── */
+    .sequence-timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .seq-day {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .seq-day .day-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .seq-day .day-action {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .seq-day .day-channel {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .ch-email { color: var(--accent); }
+    .ch-li { color: #0077b5; }
+    .ch-call { color: var(--accent4); }
+    .ch-video { color: var(--accent3); }
+
+    /* ─── ICP TABLE ─── */
+    .icp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .icp-grid { grid-template-columns: 1fr; } }
+    .icp-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .icp-block h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .icp-block ul { list-style: none; padding: 0; }
+    .icp-block li {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icp-block li:last-child { border-bottom: none; }
+    .icp-block li::before { content: '→'; color: var(--accent); font-size: 12px; }
+
+    /* ─── METRICS ─── */
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+    .metric-card .metric-num {
+      font-size: 36px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .metric-card .metric-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .metric-card .metric-note { font-size: 12px; color: var(--muted); }
+
+    /* ─── SHOWRATE ─── */
+    .showrate-block {
+      background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(0,212,255,0.05));
+      border: 1px solid rgba(108,99,255,0.3);
+      border-radius: 14px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+    .showrate-block h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--accent2);
+    }
+    .showrate-tactics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .tactic {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .tactic .tactic-num {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .tactic h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .tactic p { font-size: 13px; color: var(--muted); }
+
+    /* ─── TEMPLATES ─── */
+    .email-template {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--text);
+      white-space: pre-wrap;
+      margin-top: 12px;
+    }
+    .template-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+
+    /* ─── WEEKLY CADENCE ─── */
+    .week-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      margin-bottom: 12px;
+      align-items: start;
+    }
+    .week-day {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--accent2);
+      padding-top: 10px;
+    }
+    .week-tasks {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .week-tasks ul { list-style: none; padding: 0; }
+    .week-tasks li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0;
+    }
+    .week-tasks li::before { content: '✓ '; color: var(--accent4); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────────── HERO ─────────────────── -->
+<div class="hero">
+  <div class="badge">Newronium · Data & AI</div>
+  <h1>Go-to-Market Playbook<br>Data & AI Services</h1>
+  <p>A full outbound system to generate qualified leads, book meetings, and hit an 80%+ show rate — powered by Apollo, Clay, and a smart multichannel stack.</p>
+  <div class="hero-metrics">
+    <div class="hero-metric"><div class="num">80%+</div><div class="label">Target Show Rate</div></div>
+    <div class="hero-metric"><div class="num">3–5x</div><div class="label">Pipeline Multiplier</div></div>
+    <div class="hero-metric"><div class="num">7–9</div><div class="label">Touches per Lead</div></div>
+    <div class="hero-metric"><div class="num">≤10d</div><div class="label">Sequence Window</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ─────────────────── 1. SERVICES MAP ─────────────────── -->
+  <div class="section">
+    <div class="section-label">01 — What We Sell</div>
+    <div class="section-title">Newronium Data & AI Service Lines</div>
+    <p class="section-sub">Each service maps to a specific buyer pain point. Anchor every outreach message to one of these problems — not the service name.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🗄️</div>
+        <h3>Data Strategy & Governance</h3>
+        <p>Data roadmaps, cataloguing, quality frameworks, and compliance (GDPR, LGPD). For companies drowning in siloed, unreliable data.</p>
+        <br/><div><span class="tag">Data Office</span><span class="tag">CDO</span><span class="tag">Compliance</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Data Engineering & Pipelines</h3>
+        <p>Modern data stack: ETL/ELT, lakehouses, real-time streaming, Databricks, Snowflake, dbt. For ops teams losing time to broken pipelines.</p>
+        <br/><div><span class="tag">CTO</span><span class="tag">Head of Data</span><span class="tag">Engineering</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Analytics & Business Intelligence</h3>
+        <p>Self-service dashboards, KPI frameworks, embedded analytics, Power BI / Tableau / Metabase. For CEOs who make decisions on gut instead of data.</p>
+        <br/><div><span class="tag">CEO</span><span class="tag">COO</span><span class="tag">VP Finance</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>AI/ML Model Development</h3>
+        <p>Custom ML models: demand forecasting, churn prediction, fraud detection, recommendation engines. Delivered as production-ready APIs.</p>
+        <br/><div><span class="tag">Product</span><span class="tag">CTO</span><span class="tag">Head of AI</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">✨</div>
+        <h3>Generative AI Implementation</h3>
+        <p>Enterprise LLM integration (RAG, fine-tuning, agents), internal copilots, document automation. For teams under pressure to "do AI" now.</p>
+        <br/><div><span class="tag">CIO</span><span class="tag">Digital Transformation</span></div>
+      </div>
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>MLOps & AI in Production</h3>
+        <p>Model monitoring, drift detection, retraining pipelines, cloud deployment (AWS, GCP, Azure). For teams whose models work in notebooks but not in production.</p>
+        <br/><div><span class="tag">Engineering</span><span class="tag">Platform</span><span class="tag">DevOps</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 2. ICP ─────────────────── -->
+  <div class="section">
+    <div class="section-label">02 — Who We Target</div>
+    <div class="section-title">Ideal Customer Profile (ICP)</div>
+    <p class="section-sub">Focus beats volume. One well-researched lead outperforms ten cold blasts. These are the filters for Apollo/Clay prospecting lists.</p>
+    <div class="icp-grid">
+      <div class="icp-block">
+        <h4>Company Firmographics</h4>
+        <ul>
+          <li>Revenue: €5M – €200M (mid-market)</li>
+          <li>Employees: 50 – 1,000</li>
+          <li>Funding: Series A–C or profitable SME</li>
+          <li>Tech stack: modern SaaS tools (signal of data maturity intent)</li>
+          <li>Recently hired a Data / AI role (intent signal)</li>
+          <li>Posted Data Engineer or ML Engineer jobs in past 90 days</li>
+        </ul>
+      </div>
+      <div class="icp-block">
+        <h4>Priority Industries</h4>
+        <ul>
+          <li>Financial Services & Fintech</li>
+          <li>Health & MedTech</li>
+          <li>Retail & E-commerce</li>
+          <li>Logistics & Supply Chain</li>
+          <li>Insurance</li>
+          <li>SaaS / B2B Tech products</li>
+          <li>Manufacturing (Industry 4.0)</li>
+        </ul>
+      </div>
+      <div class="icp-block">
+        <h4>Decision Makers (Primary Buyers)</h4>
+        <ul>
+          <li>Chief Data Officer (CDO)</li>
+          <li>Chief Technology Officer (CTO)</li>
+          <li>VP / Head of Data & Analytics</li>
+          <li>Head of AI / Machine Learning</li>
+          <li>Chief Digital Officer</li>
+          <li>Director of Engineering (Data)</li>
+        </ul>
+      </div>
+      <div class="icp-block">
+        <h4>Champions & Influencers</h4>
+        <ul>
+          <li>Data Engineers (use pain to escalate)</li>
+          <li>Product Managers with data focus</li>
+          <li>BI Analysts frustrated by tooling</li>
+          <li>CFO/COO (when framing ROI)</li>
+          <li>IT Directors overseeing cloud infra</li>
+        </ul>
+      </div>
+      <div class="icp-block">
+        <h4>Intent / Trigger Signals</h4>
+        <ul>
+          <li>Job postings: Data Engineer, ML Engineer, Analytics Lead</li>
+          <li>Recent funding round announcement</li>
+          <li>New C-Suite hire (CDO / CTO / CIO)</li>
+          <li>Company mentioned "AI strategy" in press/earnings</li>
+          <li>Attending data/AI conferences (signal via LinkedIn)</li>
+          <li>Using outdated stack (legacy BI tools, no data warehouse)</li>
+        </ul>
+      </div>
+      <div class="icp-block">
+        <h4>Disqualifiers (Do Not Target)</h4>
+        <ul>
+          <li>Companies with 5+ in-house data scientists already</li>
+          <li>Active relationship with a direct competitor</li>
+          <li>Pure startups pre-product (no budget)</li>
+          <li>Public sector (long sales cycles, low fit)</li>
+          <li>Companies that just completed a similar engagement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 3. TOOL STACK ─────────────────── -->
+  <div class="section">
+    <div class="section-label">03 — The Stack</div>
+    <div class="section-title">GTM Tool Stack & Roles</div>
+    <p class="section-sub">Each tool has one primary job. No overlap, no wasted spend. Start with Tier 1 — add Tier 2 as volume scales.</p>
+
+    <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent4); margin-bottom: 14px;">Tier 1 — Core Stack (Start Here)</p>
+    <div class="grid-2" style="margin-bottom: 20px;">
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(255,110,0,0.15);">🔍</div>
+        <div>
+          <h4>Apollo.io</h4>
+          <div class="role" style="color: var(--accent);">Prospecting + Email Sequences</div>
+          <p>Build ICP-filtered contact lists (title, industry, headcount, tech stack). Run email + call sequences with branching logic. Built-in CRM sync. <strong>Start here for all prospecting.</strong></p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(108,99,255,0.15);">🧪</div>
+        <div>
+          <h4>Clay</h4>
+          <div class="role" style="color: var(--accent);">Enrichment + Personalization Engine</div>
+          <p>Pull Apollo contacts → waterfall-enrich (email, phone, LinkedIn, job postings, tech stack, news mentions) → generate hyper-personalized snippets using AI. Feeds back into Apollo sequences.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(0,119,181,0.15);">💼</div>
+        <div>
+          <h4>LinkedIn Sales Navigator</h4>
+          <div class="role" style="color: var(--accent);">Account Intelligence + Social Selling</div>
+          <p>Track decision maker activity, get job change alerts, map buying committees, send InMail to non-connection leads. Feed found profiles into Clay for enrichment.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(0,212,255,0.15);">📧</div>
+        <div>
+          <h4>Instantly.ai</h4>
+          <div class="role" style="color: var(--accent);">Cold Email Infrastructure</div>
+          <p>Unlimited sending mailboxes with auto-warmup and inbox rotation. Run high-volume cold email campaigns without harming domain reputation. Connects with Clay output.</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 14px;">Tier 2 — Amplifiers (Add at Scale)</p>
+    <div class="grid-3" style="margin-bottom: 20px;">
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(81,207,102,0.12);">🎯</div>
+        <div>
+          <h4>HeyReach</h4>
+          <div class="role" style="color: var(--accent2);">LinkedIn Outreach Automation</div>
+          <p>Multi-account LinkedIn sequences: connect requests, message drips, profile views, follow-ups. Runs parallel to email for multichannel coverage.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(255,107,107,0.12);">🎥</div>
+        <div>
+          <h4>Loom</h4>
+          <div class="role" style="color: var(--accent2);">Pre-Meeting Personalized Video</div>
+          <p>Record a 60–90s personalized video per prospect referencing their specific stack/problem. Attach in emails. Proven +30% reply rate uplift in B2B consulting sales.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(108,99,255,0.12);">📅</div>
+        <div>
+          <h4>Calendly</h4>
+          <div class="role" style="color: var(--accent2);">Meeting Scheduling + Reminders</div>
+          <p>Auto-send confirmation, 24h reminder, and 1h reminder emails + SMS. Add a pre-meeting asset in confirmation email to prime the prospect before the call.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(255,165,0,0.12);">📰</div>
+        <div>
+          <h4>Crunchbase / Dealroom</h4>
+          <div class="role" style="color: var(--accent2);">Funding & Trigger Intelligence</div>
+          <p>Monitor funding rounds and leadership hires in target sectors. Funding events = budget unlocked = perfect outreach window. Feed into Clay enrichment.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(0,212,255,0.12);">🔔</div>
+        <div>
+          <h4>Bombora / G2 Intent</h4>
+          <div class="role" style="color: var(--accent2);">Intent Data (Buyer Signals)</div>
+          <p>Identify companies actively researching "data engineering," "ML consulting," or "AI strategy" right now. Prioritize these in Apollo sequences — 3x higher conversion rate.</p>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon" style="background: rgba(81,207,102,0.12);">🗂️</div>
+        <div>
+          <h4>Notion CRM / Airtable</h4>
+          <div class="role" style="color: var(--accent2);">Pipeline Tracking & Reporting</div>
+          <p>Track all leads: stage (contacted → replied → meeting booked → showed → qualified → proposal). Report show rate, reply rate, and conversion weekly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 4. WORKFLOW ─────────────────── -->
+  <div class="section">
+    <div class="section-label">04 — The Engine</div>
+    <div class="section-title">Lead Generation Workflow</div>
+    <p class="section-sub">This is the repeatable machine. Run it weekly. Each loop should produce 30–50 qualified leads entering the sequence.</p>
+
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Build the Target List (Apollo + Sales Nav)</h4>
+          <p>In Apollo: filter by industry, headcount (50–1000), seniority (Director+), tech stack (Snowflake, Databricks, dbt = data-mature), location. Pull 200–300 contacts per week. In Sales Navigator: filter for "recently changed jobs" in CDO/CTO/Head of Data roles — these buyers want to make an impact quickly.</p>
+          <div class="tools-used"><span class="tag">Apollo.io</span><span class="tag">LinkedIn Sales Nav</span><span class="tag">Crunchbase</span></div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Enrich & Score in Clay</h4>
+          <p>Import Apollo list into Clay. Run waterfall enrichment: verify email, pull LinkedIn URL, scrape recent posts, check company job postings (data roles = intent), pull tech stack via BuiltWith, check recent funding. Clay AI scores each lead 1–10 on ICP fit. Only send leads scored 7+ to outreach.</p>
+          <div class="tools-used"><span class="tag">Clay</span><span class="tag">BuiltWith</span><span class="tag">Hunter.io</span><span class="tag">OpenAI via Clay</span></div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Generate Personalized Snippets (Clay AI)</h4>
+          <p>For each lead, Clay generates a 1–2 sentence personalized hook: references their LinkedIn post, a recent company news item, a job posting, or a tech stack observation. This is injected into the email as a <code>{{icebreaker}}</code> variable. Never blast generic copy.</p>
+          <div class="tools-used"><span class="tag">Clay + GPT-4o</span></div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Launch Multichannel Sequence</h4>
+          <p>Enriched leads flow into Apollo sequences (email) and HeyReach (LinkedIn) simultaneously. 7–9 touches over 10 days across email + LinkedIn + (optional) phone. Email goes via Instantly for deliverability at scale. Each touch references the same core pain — not a new pitch.</p>
+          <div class="tools-used"><span class="tag">Apollo.io</span><span class="tag">Instantly.ai</span><span class="tag">HeyReach</span></div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Qualify Replies & Book Meetings</h4>
+          <p>Any positive reply gets a response within 2 hours (fast response = higher close rate). Send Calendly link with a specific slot suggestion ("Does Thursday 10am or Friday 2pm work?"). Include a one-page Data & AI service overview PDF in the booking confirmation.</p>
+          <div class="tools-used"><span class="tag">Calendly</span><span class="tag">Apollo</span></div>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h4>Pre-Meeting Show Rate Protocol</h4>
+          <p>At booking: Calendly sends confirmation + service overview PDF. T-24h: automated reminder with a case study relevant to their industry. T-1h: SMS/email reminder. T-10min before: manual message from you: "Looking forward to our call in 10 minutes — here's the Zoom link." This protocol targets 80%+ show rate.</p>
+          <div class="tools-used"><span class="tag">Calendly</span><span class="tag">Loom</span><span class="tag">Manual touch</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 5. SEQUENCES ─────────────────── -->
+  <div class="section">
+    <div class="section-label">05 — The Outreach</div>
+    <div class="section-title">Multichannel Sequence Templates</div>
+    <p class="section-sub">7 touches, 10 days. Mix email and LinkedIn. Each message is one pain point, one ask. Never pitch the full service catalogue.</p>
+
+    <div class="sequence-timeline">
+      <div class="seq-day"><div class="day-label">Day 1</div><div class="day-action ch-email">Cold Email #1</div><div class="day-channel">The Personalized Hook</div></div>
+      <div class="seq-day"><div class="day-label">Day 2</div><div class="day-action ch-li">LinkedIn</div><div class="day-channel">Connection Request + Note</div></div>
+      <div class="seq-day"><div class="day-label">Day 4</div><div class="day-action ch-email">Email #2</div><div class="day-channel">Case Study / Social Proof</div></div>
+      <div class="seq-day"><div class="day-label">Day 5</div><div class="day-action ch-li">LinkedIn</div><div class="day-channel">Engagement on their post</div></div>
+      <div class="seq-day"><div class="day-label">Day 7</div><div class="day-action ch-video">Email #3</div><div class="day-channel">Personalized Loom Video</div></div>
+      <div class="seq-day"><div class="day-label">Day 9</div><div class="day-action ch-call">Call</div><div class="day-channel">30s voicemail if no answer</div></div>
+      <div class="seq-day"><div class="day-label">Day 10</div><div class="day-action ch-email">Email #4</div><div class="day-channel">"Break-up" email</div></div>
+    </div>
+
+    <div style="margin-top: 36px;">
+      <div class="template-label">Email #1 — Personalized Hook (Day 1)</div>
+      <div class="email-template">Subject: {{Company}} + data pipeline bottleneck?
+
+Hi {{FirstName}},
+
+{{icebreaker_from_Clay}}
+
+I work with mid-sized {{industry}} companies that are hitting the same wall: data teams spending 60% of their time fixing pipelines instead of generating insights.
+
+We helped [Similar Company in their sector] cut data downtime by 70% and launch a self-service analytics layer in under 90 days.
+
+Would a 20-minute call this week make sense to see if we could do the same for {{Company}}?
+
+[Your name]
+Newronium | Data & AI</div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="template-label">Email #2 — Social Proof (Day 4)</div>
+      <div class="email-template">Subject: How [Industry Peer] 3x'd their data team output
+
+Hi {{FirstName}},
+
+Sending this because {{Company}} looks similar to a client we worked with in {{industry}}.
+
+They had: fragmented data sources, no reliable single source of truth, and a BI tool nobody used.
+
+In 3 months we delivered:
+→ A unified data lakehouse on Snowflake
+→ Self-service dashboards adopted by 80% of the business
+→ A churn prediction model running in production
+
+The CDO said it was "the first data project that actually shipped."
+
+Happy to share the full case study. Worth 20 minutes?
+
+[Your name]</div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="template-label">Email #4 — Break-up (Day 10)</div>
+      <div class="email-template">Subject: Closing the loop
+
+Hi {{FirstName}},
+
+I've reached out a few times — I'll take the hint that the timing isn't right.
+
+I'll stop reaching out. But if data engineering, AI adoption, or analytics ever become a priority, I'm a message away.
+
+One question before I go: is there a better person at {{Company}} I should be speaking with?
+
+Thanks for your time,
+[Your name]</div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="template-label">LinkedIn Connection Note (Day 2)</div>
+      <div class="email-template">Hi {{FirstName}} — saw you're leading data at {{Company}}.
+We help companies in {{industry}} modernize their data stack and deploy AI that
+actually runs in production. Thought it was worth connecting. No pitch, I promise.</div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 6. SHOW RATE ─────────────────── -->
+  <div class="section">
+    <div class="section-label">06 — The 80% Show Rate</div>
+    <div class="section-title">Meeting Attendance Optimization</div>
+    <p class="section-sub">The industry average show rate is 55–65%. Getting to 80%+ requires a deliberate pre-meeting protocol, not just calendar reminders.</p>
+
+    <div class="showrate-block">
+      <h3>The 6-Touch Pre-Meeting Protocol</h3>
+      <div class="showrate-tactics">
+        <div class="tactic">
+          <div class="tactic-num">T–0</div>
+          <h4>Booking Confirmation</h4>
+          <p>Calendly auto-sends. Include a 1-page "What to expect" PDF + a relevant case study PDF. Prime their expectations immediately.</p>
+        </div>
+        <div class="tactic">
+          <div class="tactic-num">T–48h</div>
+          <h4>Personalized Loom Video</h4>
+          <p>Record a 90-second video referencing their company, their role, and the specific problem you'll discuss. Send via email. "Here's what I'll cover Thursday."</p>
+        </div>
+        <div class="tactic">
+          <div class="tactic-num">T–24h</div>
+          <h4>Industry Case Study</h4>
+          <p>Send via email: "Ahead of tomorrow — here's how we solved [their pain] for [company in their sector]. This gives us a starting point."</p>
+        </div>
+        <div class="tactic">
+          <div class="tactic-num">T–4h</div>
+          <h4>SMS / WhatsApp Reminder</h4>
+          <p>"Looking forward to our call today at [time]. Here's the Zoom link: [link]. Reply RESCHEDULE if the time no longer works." Reduces ghost rate by 20–30%.</p>
+        </div>
+        <div class="tactic">
+          <div class="tactic-num">T–10min</div>
+          <h4>Manual Ping</h4>
+          <p>A short LinkedIn message or email: "We're on in 10 minutes — here's the meeting link. See you there." Personal touch that signals you're prepared and present.</p>
+        </div>
+        <div class="tactic">
+          <div class="tactic-num">No Show</div>
+          <h4>No-Show Recovery</h4>
+          <p>Wait 10 minutes, send: "Looks like something came up — no problem. Here are 3 slots for next week: [Calendly link]." Recover 40–60% of no-shows same week.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 24px;">
+      <div class="card">
+        <h3>✅ What Drives Show Rate Up</h3>
+        <ul>
+          <li>Pre-meeting value delivery (case study, Loom video) — +20–30%</li>
+          <li>Specific time confirmation (not open slot) — +10%</li>
+          <li>SMS/WhatsApp reminder 4h before — +20%</li>
+          <li>Manual personal ping 10 min before — +5–10%</li>
+          <li>Reschedule option in every reminder (reduces ghost) — +10%</li>
+          <li>Short meetings (20–25 min, not 60) — easier to commit to</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>❌ What Kills Show Rate</h3>
+        <ul>
+          <li>Only one automated Calendly reminder (default)</li>
+          <li>Generic meeting title ("Discovery Call")</li>
+          <li>No pre-meeting material — prospect forgets why they booked</li>
+          <li>Booking more than 5 days in advance without re-confirming</li>
+          <li>No-show ignored — they never get rescheduled</li>
+          <li>Long gaps between booking and meeting date</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 7. KPIs ─────────────────── -->
+  <div class="section">
+    <div class="section-label">07 — Performance</div>
+    <div class="section-title">KPIs & Weekly Targets</div>
+    <p class="section-sub">Track these weekly. If a metric drops below target, diagnose before increasing volume — more bad outreach is not the fix.</p>
+
+    <div class="grid-4">
+      <div class="metric-card">
+        <div class="metric-name">Leads Prospected / Week</div>
+        <div class="metric-num">200</div>
+        <div class="metric-note">Apollo + Sales Nav filtered by ICP</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Enriched & Scored / Week</div>
+        <div class="metric-num">80+</div>
+        <div class="metric-note">Clay score ≥7, sent to sequence</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Email Open Rate</div>
+        <div class="metric-num">45%+</div>
+        <div class="metric-note">Industry benchmark: 25–35%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Reply Rate</div>
+        <div class="metric-num">8–12%</div>
+        <div class="metric-note">Positive + negative replies</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Meetings Booked / Week</div>
+        <div class="metric-num">5–8</div>
+        <div class="metric-note">From 80 sequences launched</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Meeting Show Rate</div>
+        <div class="metric-num">80%+</div>
+        <div class="metric-note">Target with 6-touch protocol</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Qualified Meetings / Week</div>
+        <div class="metric-num">4–6</div>
+        <div class="metric-note">ICP confirmed, budget & pain validated</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Proposal → Close Rate</div>
+        <div class="metric-num">25–35%</div>
+        <div class="metric-note">Benchmark for consulting services</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px;">
+      <h3 style="margin-bottom: 16px; font-size: 16px;">Pipeline Math (Monthly Projection)</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 14px;">
+        <div style="text-align: center; padding: 12px; background: var(--surface2); border-radius: 8px;">
+          <div style="color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Sequences Launched</div>
+          <div style="font-weight: 800; font-size: 22px;">320</div>
+          <div style="color: var(--muted); font-size: 11px;">80/week × 4 weeks</div>
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--surface2); border-radius: 8px;">
+          <div style="color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Meetings Booked</div>
+          <div style="font-weight: 800; font-size: 22px; color: var(--accent);">25–32</div>
+          <div style="color: var(--muted); font-size: 11px;">8–10% positive reply</div>
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--surface2); border-radius: 8px;">
+          <div style="color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Meetings Held</div>
+          <div style="font-weight: 800; font-size: 22px; color: var(--accent2);">20–26</div>
+          <div style="color: var(--muted); font-size: 11px;">80% show rate</div>
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--surface2); border-radius: 8px;">
+          <div style="color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Qualified Leads</div>
+          <div style="font-weight: 800; font-size: 22px; color: var(--accent4);">14–18</div>
+          <div style="color: var(--muted); font-size: 11px;">~65% meeting qualification</div>
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--surface2); border-radius: 8px;">
+          <div style="color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Proposals Sent</div>
+          <div style="font-weight: 800; font-size: 22px; color: var(--accent3);">5–8</div>
+          <div style="color: var(--muted); font-size: 11px;">30–40% advance to proposal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 8. WEEKLY CADENCE ─────────────────── -->
+  <div class="section">
+    <div class="section-label">08 — The Rhythm</div>
+    <div class="section-title">Weekly Operating Cadence</div>
+    <p class="section-sub">Discipline beats inspiration. This is what each week looks like when the machine is running.</p>
+
+    <div class="week-row">
+      <div class="week-day">Monday</div>
+      <div class="week-tasks"><ul>
+        <li>Pull 200 new contacts from Apollo (ICP filters)</li>
+        <li>Import to Clay — run enrichment + scoring</li>
+        <li>Review Clay output, manually approve top 80 leads</li>
+        <li>Check replies from prior week sequences, respond within 2h</li>
+      </ul></div>
+    </div>
+    <div class="week-row">
+      <div class="week-day">Tuesday</div>
+      <div class="week-tasks"><ul>
+        <li>Launch 80 new leads into Apollo email sequence</li>
+        <li>Launch same leads into HeyReach LinkedIn sequence</li>
+        <li>Research this week's booked meetings (company + person)</li>
+        <li>Prepare personalized Loom videos for Thursday/Friday meetings</li>
+      </ul></div>
+    </div>
+    <div class="week-row">
+      <div class="week-day">Wednesday</div>
+      <div class="week-tasks"><ul>
+        <li>Engage with prospects' LinkedIn posts (like, comment — warm touch)</li>
+        <li>Send T-48h Loom video to all meetings booked for Friday</li>
+        <li>Reply to all sequence replies (positive and negative)</li>
+        <li>Check LinkedIn Sales Nav for new job-change alerts → add to next list</li>
+      </ul></div>
+    </div>
+    <div class="week-row">
+      <div class="week-day">Thursday</div>
+      <div class="week-tasks"><ul>
+        <li>Conduct discovery meetings (hold 20–25 min, strict agenda)</li>
+        <li>Send T-24h case study to Friday meetings</li>
+        <li>Follow up with no-shows from this week with reschedule offer</li>
+        <li>Update pipeline tracker (Notion/Airtable) with meeting outcomes</li>
+      </ul></div>
+    </div>
+    <div class="week-row">
+      <div class="week-day">Friday</div>
+      <div class="week-tasks"><ul>
+        <li>Conduct remaining discovery meetings</li>
+        <li>Send post-meeting follow-up within 2h (summary + next step)</li>
+        <li>Weekly metrics review: reply rate, show rate, qualified meetings</li>
+        <li>Identify what's working → double down next week</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- ─────────────────── 9. DISCOVERY CALL ─────────────────── -->
+  <div class="section">
+    <div class="section-label">09 — The Meeting</div>
+    <div class="section-title">Discovery Call Framework (20–25 min)</div>
+    <p class="section-sub">The goal of the first meeting is NOT to pitch. It's to diagnose pain and earn the right to a second call with a proposal.</p>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <h3>0–3 min: Set the Agenda</h3>
+          <p>"I have 20 minutes reserved. I'd like to understand what's happening on your data/AI side, share a couple of relevant things we've done, and we'll both decide if a next step makes sense. Sound good?"</p>
+        </div>
+        <div class="card" style="margin-bottom: 16px;">
+          <h3>3–12 min: Diagnose Pain</h3>
+          <ul>
+            <li>"What's your biggest data challenge right now?"</li>
+            <li>"What does your current data stack look like?"</li>
+            <li>"Where is your team spending the most time that they shouldn't be?"</li>
+            <li>"What would it mean for the business if that was solved?"</li>
+            <li>"What have you already tried?"</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>12–18 min: Relevant Story</h3>
+          <p>Share ONE case study that maps directly to their pain. Be specific: company size, problem, what you did, measurable result. Never share a generic pitch deck.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <h3>18–22 min: Qualify</h3>
+          <ul>
+            <li>"Is this something you're looking to solve in the next quarter?"</li>
+            <li>"Who else would be involved in this decision?"</li>
+            <li>"Do you have budget allocated, or is this still exploratory?"</li>
+            <li>"What does success look like for you in 6 months?"</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-bottom: 16px;">
+          <h3>22–25 min: Next Step</h3>
+          <p>Always close with a concrete next step: "I'll send you a tailored proposal by [specific date]. Can we book a 30-min follow-up for [specific day]?" Never leave it as "I'll be in touch."</p>
+        </div>
+        <div class="card">
+          <h3>Post-Meeting (within 2h)</h3>
+          <p>Email with: summary of what you heard, the specific outcome you'd deliver, and Calendly link for the proposal review call. Speed of follow-up = professionalism signal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Newronium · Data & AI GTM Playbook · Built for qualified lead generation and 80%+ show rate</p>
+  <p style="margin-top: 8px;">Stack: Apollo · Clay · LinkedIn Sales Navigator · Instantly · HeyReach · Loom · Calendly</p>
+</footer>
+
+</body>
+</html>
