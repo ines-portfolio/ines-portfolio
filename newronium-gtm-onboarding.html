@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newronium × GTM Onboarding — Data & AI</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f6f3;
+      --surface2: #efefef;
+      --border: #e3e2df;
+      --accent: #6c63ff;
+      --accent-light: rgba(108,99,255,0.08);
+      --text: #1a1a1a;
+      --muted: #787774;
+      --tag-blue: #dbeafe;
+      --tag-blue-text: #1d4ed8;
+      --tag-purple: #ede9fe;
+      --tag-purple-text: #6d28d9;
+      --tag-green: #dcfce7;
+      --tag-green-text: #15803d;
+      --tag-orange: #ffedd5;
+      --tag-orange-text: #c2410c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: linear-gradient(135deg, #1a1040 0%, #2d1f6e 50%, #0f2744 100%);
+      padding: 56px 40px 44px;
+      border-radius: 12px;
+      margin-bottom: 48px;
+    }
+    .cover .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .cover h1 {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cover p {
+      color: rgba(255,255,255,0.65);
+      font-size: 14px;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .meta-chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── CONTEXT BOX ── */
+    .context-box {
+      background: var(--accent-light);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 40px;
+      font-size: 13.5px;
+      color: #3d3a6e;
+      line-height: 1.7;
+    }
+    .context-box strong { color: var(--accent); }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 48px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-num {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      color: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .section-tag {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .tag-blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+    .tag-purple { background: var(--tag-purple); color: var(--tag-purple-text); }
+    .tag-green { background: var(--tag-green); color: var(--tag-green-text); }
+    .tag-orange { background: var(--tag-orange); color: var(--tag-orange-text); }
+
+    /* ── QUESTION ── */
+    .question {
+      margin-bottom: 22px;
+    }
+    .q-label {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .q-label .q-num {
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 12px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .q-hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      margin-left: 22px;
+      font-style: italic;
+    }
+    .q-input {
+      width: 100%;
+      min-height: 44px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+      transition: border 0.15s;
+    }
+    .q-input:focus { border-color: var(--accent); }
+    .q-input.tall { min-height: 88px; }
+    .q-input.short { min-height: 44px; resize: none; }
+
+    /* ── TABLE QUESTION ── */
+    .q-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .q-table th {
+      background: var(--surface2);
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .q-table td {
+      border: 1px solid var(--border);
+      padding: 0;
+    }
+    .q-table td input {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+    }
+    .q-table td input:focus { background: var(--accent-light); }
+    .q-table tr:nth-child(even) td { background: var(--surface); }
+
+    /* ── CHECKBOX GROUP ── */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .checkbox-item:hover { border-color: var(--accent); background: var(--accent-light); }
+    .checkbox-item input[type="checkbox"] { accent-color: var(--accent); width: 14px; height: 14px; }
+
+    /* ── RADIO GROUP ── */
+    .radio-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .radio-item:hover { border-color: var(--accent); }
+    .radio-item input { accent-color: var(--accent); }
+
+    /* ── SCALE ── */
+    .scale-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .scale-label { font-size: 12px; color: var(--muted); width: 80px; }
+    .scale-label.right { text-align: right; }
+    .scale-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .scale-dot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .scale-dot input { accent-color: var(--accent); }
+    .scale-dot span { font-size: 11px; color: var(--muted); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 2px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* ── NOTE BOX ── */
+    .note {
+      background: #fefce8;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #78350f;
+      margin-bottom: 20px;
+    }
+    .note strong { color: #92400e; }
+
+    /* ── SUBMIT BLOCK ── */
+    .submit-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .submit-block h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .submit-block p { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .submit-btn {
+      display: inline-block;
+      background: var(--text);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .submit-btn:hover { background: #333; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    @media print {
+      .page { padding: 20px; }
+      .cover { border-radius: 0; }
+      .q-input { border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── COVER ── -->
+  <div class="cover">
+    <div class="label">GTM Engineering · Onboarding</div>
+    <h1>Newronium — Data & AI<br>Client Intelligence Form</h1>
+    <p>This form helps your GTM Engineer build the right outbound strategy from day one. Your answers define the ICP, the messaging, the outreach markets, and the social proof we use to open doors for you. 15–20 minutes to complete.</p>
+    <div class="cover-meta">
+      <span class="meta-chip">Data & AI Service</span>
+      <span class="meta-chip">Focus: Portugal · France · Switzerland</span>
+      <span class="meta-chip">Confidential</span>
+    </div>
+  </div>
+
+  <!-- ── CONTEXT ── -->
+  <div class="context-box">
+    <strong>Why this form exists:</strong> Before any outreach is sent, your GTM Engineer needs to understand your market from the inside — your best clients, your strongest results, what resonates with buyers, and what your team has already tried. This form replaces 3–4 alignment calls and gets us moving faster.
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 1 — COMPANY & SERVICE
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Company & Service Understanding</div>
+      <span class="section-tag tag-blue">Foundation</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">1.1</span> How would you describe the Data & AI service in one sentence — the way a client would explain it to a colleague?</div>
+      <div class="q-hint">Not the technical definition. How does a non-technical buyer describe the value they got?</div>
+      <textarea class="q-input" placeholder="e.g. 'They turned our messy data into a system our whole team actually uses to make decisions.'"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">1.2</span> What is the one problem the Data & AI service solves that others don't — or don't solve as well?</div>
+      <textarea class="q-input" placeholder="Your honest differentiator..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">1.3</span> Which of the 3 service lines is currently most in demand from clients?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="service" /> Data Stack & Architecture</label>
+        <label class="radio-item"><input type="radio" name="service" /> Data Engineering (Pipelines)</label>
+        <label class="radio-item"><input type="radio" name="service" /> Analytics + Applied AI</label>
+        <label class="radio-item"><input type="radio" name="service" /> All equally</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">1.4</span> What is the typical engagement duration and budget range for a Data & AI project?</div>
+      <div class="q-hint">Approximate is fine — helps calibrate the target company profile.</div>
+      <textarea class="q-input short" placeholder="e.g. 3–6 months / €30k–€120k per project"></textarea>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 2 — ICP (THEIR VERSION)
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Your Ideal Customer Profile (ICP)</div>
+      <span class="section-tag tag-purple">Targeting</span>
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> Describe your BEST clients — the ones that were easy to work with, valued the work, paid on time, and got real results. Not your average client. Your best one.
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">2.1</span> What company size (employees) is your sweet spot?</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> Under 50</label>
+        <label class="checkbox-item"><input type="checkbox" /> 50–200</label>
+        <label class="checkbox-item"><input type="checkbox" /> 200–500</label>
+        <label class="checkbox-item"><input type="checkbox" /> 500–1,000</label>
+        <label class="checkbox-item"><input type="checkbox" /> 1,000–5,000</label>
+        <label class="checkbox-item"><input type="checkbox" /> 5,000+</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">2.2</span> Which industries have been your best-fit clients?</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> Financial Services</label>
+        <label class="checkbox-item"><input type="checkbox" /> Fintech</label>
+        <label class="checkbox-item"><input type="checkbox" /> Insurance</label>
+        <label class="checkbox-item"><input type="checkbox" /> Retail / E-commerce</label>
+        <label class="checkbox-item"><input type="checkbox" /> Logistics</label>
+        <label class="checkbox-item"><input type="checkbox" /> Manufacturing</label>
+        <label class="checkbox-item"><input type="checkbox" /> Health / MedTech</label>
+        <label class="checkbox-item"><input type="checkbox" /> SaaS / Tech</label>
+        <label class="checkbox-item"><input type="checkbox" /> Telecoms</label>
+        <label class="checkbox-item"><input type="checkbox" /> Energy / Utilities</label>
+        <label class="checkbox-item"><input type="checkbox" /> Public Sector</label>
+        <label class="checkbox-item"><input type="checkbox" /> Other</label>
+      </div>
+      <textarea class="q-input" style="margin-top:8px; min-height:44px;" placeholder="Any other industries or specify 'Other'..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">2.3</span> Who is typically the main decision maker or buyer for this service?</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> CEO / Co-founder</label>
+        <label class="checkbox-item"><input type="checkbox" /> CTO</label>
+        <label class="checkbox-item"><input type="checkbox" /> CDO (Chief Data Officer)</label>
+        <label class="checkbox-item"><input type="checkbox" /> COO</label>
+        <label class="checkbox-item"><input type="checkbox" /> Head of Data</label>
+        <label class="checkbox-item"><input type="checkbox" /> VP Analytics</label>
+        <label class="checkbox-item"><input type="checkbox" /> Head of AI / ML</label>
+        <label class="checkbox-item"><input type="checkbox" /> IT Director</label>
+        <label class="checkbox-item"><input type="checkbox" /> CFO</label>
+        <label class="checkbox-item"><input type="checkbox" /> Other</label>
+      </div>
+      <textarea class="q-input" style="margin-top:8px; min-height:44px;" placeholder="Other decision makers..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">2.4</span> What specific situation or trigger makes a company start looking for this service?</div>
+      <div class="q-hint">e.g. recent funding, new hire, failed internal project, compliance pressure, new product launch...</div>
+      <textarea class="q-input tall" placeholder="What usually happened at the company in the 3–6 months before they reached out to you?"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">2.5</span> Which type of company have you had the WORST experience with? (to exclude from targeting)</div>
+      <textarea class="q-input" placeholder="e.g. 'Very early startups with no data yet', 'Large enterprises with long procurement cycles'..."></textarea>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 3 — CURRENT CLIENTS
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Current & Past Clients</div>
+      <span class="section-tag tag-green">Lookalike Source</span>
+    </div>
+
+    <div class="note">
+      <strong>This is the most important section.</strong> Your current clients are the template for finding the next ones. Even anonymised entries (e.g. "Mid-size fintech, 300 people, Lisbon") are incredibly useful for building lookalike searches in Apollo.
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">3.1</span> List your current or most recent clients for the Data & AI service</div>
+      <div class="q-hint">Name can be anonymised. Fill in as many rows as possible — industry and service delivered matter most.</div>
+      <table class="q-table">
+        <thead>
+          <tr>
+            <th>Client Name (or anonymised)</th>
+            <th>Industry</th>
+            <th>Country</th>
+            <th>Company size</th>
+            <th>Service delivered</th>
+            <th>Result / Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+          <tr><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">3.2</span> Are there existing clients from Optiwisers or New Normal (other Newronium verticals) that could benefit from the Data & AI service?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="cross" /> Yes — we have identified some</label>
+        <label class="radio-item"><input type="radio" name="cross" /> Possibly — not explored yet</label>
+        <label class="radio-item"><input type="radio" name="cross" /> No</label>
+      </div>
+      <textarea class="q-input" style="margin-top:8px;" placeholder="If yes, briefly describe those opportunities..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">3.3</span> How did most of your current clients find you? (main acquisition channel so far)</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> Personal referral</label>
+        <label class="checkbox-item"><input type="checkbox" /> LinkedIn outreach</label>
+        <label class="checkbox-item"><input type="checkbox" /> Events / conferences</label>
+        <label class="checkbox-item"><input type="checkbox" /> Partner referral</label>
+        <label class="checkbox-item"><input type="checkbox" /> Cold email</label>
+        <label class="checkbox-item"><input type="checkbox" /> Website / SEO</label>
+        <label class="checkbox-item"><input type="checkbox" /> C2 Capital network</label>
+        <label class="checkbox-item"><input type="checkbox" /> Other</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 4 — CASE STUDIES & PROOF
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Case Studies & Social Proof</div>
+      <span class="section-tag tag-orange">Outreach Fuel</span>
+    </div>
+
+    <div class="note">
+      <strong>Why this matters:</strong> Cold emails with a real result (e.g. "reduced reporting time by 60%") convert 3–5x better than generic service descriptions. We need at least 2 anonymised examples to run effective outreach.
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">4.1</span> Do you have any documented case studies or client success stories?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="cs" /> Yes, published publicly</label>
+        <label class="radio-item"><input type="radio" name="cs" /> Yes, internal only</label>
+        <label class="radio-item"><input type="radio" name="cs" /> Partial / in progress</label>
+        <label class="radio-item"><input type="radio" name="cs" /> No, not yet</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">4.2</span> Describe your strongest client result (can be anonymised)</div>
+      <div class="q-hint">Industry → Problem → What you delivered → Measurable outcome. Be as specific as possible with numbers.</div>
+      <textarea class="q-input tall" placeholder="e.g. 'A fintech company (300 people, Lisbon) had 6 data sources with no central warehouse. We built a unified data stack on Snowflake + dbt in 10 weeks. Reporting time went from 5 days to same-day. The analytics team grew from 1 to 5 people using the platform.'"></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">4.3</span> Describe a second strong result (different industry if possible)</div>
+      <textarea class="q-input tall" placeholder="Second example..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">4.4</span> Do you have any client quotes or testimonials we can reference?</div>
+      <textarea class="q-input" placeholder="Even informal — e.g. a LinkedIn recommendation, a WhatsApp quote, an email compliment..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">4.5</span> What measurable results do you most commonly deliver? (tick all that apply)</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> Reduced reporting time</label>
+        <label class="checkbox-item"><input type="checkbox" /> Faster decision-making</label>
+        <label class="checkbox-item"><input type="checkbox" /> Reduced data team workload</label>
+        <label class="checkbox-item"><input type="checkbox" /> Cost reduction</label>
+        <label class="checkbox-item"><input type="checkbox" /> Revenue increase</label>
+        <label class="checkbox-item"><input type="checkbox" /> Churn reduction</label>
+        <label class="checkbox-item"><input type="checkbox" /> Fraud detection improvement</label>
+        <label class="checkbox-item"><input type="checkbox" /> Predictive model in production</label>
+        <label class="checkbox-item"><input type="checkbox" /> Dashboard adoption increase</label>
+        <label class="checkbox-item"><input type="checkbox" /> Cloud migration completed</label>
+        <label class="checkbox-item"><input type="checkbox" /> Data pipeline reliability</label>
+        <label class="checkbox-item"><input type="checkbox" /> Compliance / governance</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 5 — TECHNOLOGY & AI TOOLS
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Technology Stack & AI Tools Used</div>
+      <span class="section-tag tag-blue">Credibility Signal</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">5.1</span> What data & AI technologies does Newronium / Valuedate use internally or deliver to clients?</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" /> Snowflake</label>
+        <label class="checkbox-item"><input type="checkbox" /> Databricks</label>
+        <label class="checkbox-item"><input type="checkbox" /> dbt</label>
+        <label class="checkbox-item"><input type="checkbox" /> Apache Spark</label>
+        <label class="checkbox-item"><input type="checkbox" /> Airflow</label>
+        <label class="checkbox-item"><input type="checkbox" /> Power BI</label>
+        <label class="checkbox-item"><input type="checkbox" /> Tableau</label>
+        <label class="checkbox-item"><input type="checkbox" /> Metabase</label>
+        <label class="checkbox-item"><input type="checkbox" /> AWS (Redshift, S3, Glue)</label>
+        <label class="checkbox-item"><input type="checkbox" /> Azure (Synapse, ADF)</label>
+        <label class="checkbox-item"><input type="checkbox" /> GCP (BigQuery)</label>
+        <label class="checkbox-item"><input type="checkbox" /> Python / Scikit-learn</label>
+        <label class="checkbox-item"><input type="checkbox" /> OpenAI / Azure OpenAI</label>
+        <label class="checkbox-item"><input type="checkbox" /> LangChain / RAG</label>
+        <label class="checkbox-item"><input type="checkbox" /> MLflow / MLOps</label>
+        <label class="checkbox-item"><input type="checkbox" /> Great Expectations</label>
+      </div>
+      <textarea class="q-input" style="margin-top:8px; min-height:44px;" placeholder="Other tools not listed..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">5.2</span> Have you helped clients with technology migrations? If yes, what kind?</div>
+      <div class="q-hint">e.g. from legacy BI to Snowflake, from on-premise to cloud, from Excel to a modern data warehouse...</div>
+      <textarea class="q-input tall" placeholder="Describe migrations you've done — from what, to what, for which type of company..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">5.3</span> Do you use AI tools internally for your own operations or GTM? (e.g. ChatGPT, Copilot, Clay, Apollo, HubSpot AI...)</div>
+      <textarea class="q-input" placeholder="List tools you use internally..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">5.4</span> Do you have any technology partnerships or certifications? (e.g. AWS Partner, Microsoft Partner, Snowflake Partner)</div>
+      <textarea class="q-input" placeholder="Any official partnerships or certifications..."></textarea>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 6 — TARGET MARKET
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Target Market — EU Focus</div>
+      <span class="section-tag tag-purple">Geographic Strategy</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">6.1</span> Which markets are priority for the Data & AI service right now?</div>
+      <table class="q-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Priority (High / Medium / Low / Not yet)</th>
+            <th>Preferred outreach language</th>
+            <th>Do you have existing contacts here?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><input type="text" value="Portugal" /></td><td><input type="text" placeholder="High / Medium / Low" /></td><td><input type="text" placeholder="Portuguese / English" /></td><td><input type="text" placeholder="Yes / No" /></td></tr>
+          <tr><td><input type="text" value="France" /></td><td><input type="text" placeholder="High / Medium / Low" /></td><td><input type="text" placeholder="French / English" /></td><td><input type="text" placeholder="Yes / No" /></td></tr>
+          <tr><td><input type="text" value="Switzerland" /></td><td><input type="text" placeholder="High / Medium / Low" /></td><td><input type="text" placeholder="French / English / German" /></td><td><input type="text" placeholder="Yes / No" /></td></tr>
+          <tr><td><input type="text" placeholder="Other country..." /></td><td><input type="text" /></td><td><input type="text" /></td><td><input type="text" /></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">6.2</span> Are there industries to prioritise or avoid in each market?</div>
+      <div class="q-hint">e.g. "In France focus on FSI, avoid public sector" or "In Switzerland only fintech and pharma"</div>
+      <textarea class="q-input tall" placeholder="Any market-specific focus or restrictions..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">6.3</span> Do you have any event presence or conferences planned in these markets?</div>
+      <div class="q-hint">Events are great triggers for outreach — "I'll be at X in Lisbon in September" dramatically increases reply rates.</div>
+      <textarea class="q-input" placeholder="Any upcoming events, speaking slots, or conferences..."></textarea>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 7 — SALES HISTORY
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Sales History & What's Been Tried</div>
+      <span class="section-tag tag-orange">Don't Repeat Mistakes</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">7.1</span> What outreach or sales approaches have you tried before?</div>
+      <textarea class="q-input" placeholder="e.g. LinkedIn messages, cold email, referrals, events, paid ads..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">7.2</span> What has worked? What has not worked?</div>
+      <textarea class="q-input tall" placeholder="Be honest — this saves time and budget. If cold email failed, we need to know why."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">7.3</span> What objections do prospects most commonly raise?</div>
+      <div class="q-hint">e.g. "We already have an internal data team", "Not a priority right now", "Too expensive"...</div>
+      <textarea class="q-input tall" placeholder="Top 3 objections you hear..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">7.4</span> What is the typical sales cycle length from first contact to signed contract?</div>
+      <div class="radio-group">
+        <label class="radio-item"><input type="radio" name="cycle" /> Under 2 weeks</label>
+        <label class="radio-item"><input type="radio" name="cycle" /> 2–4 weeks</label>
+        <label class="radio-item"><input type="radio" name="cycle" /> 1–3 months</label>
+        <label class="radio-item"><input type="radio" name="cycle" /> 3–6 months</label>
+        <label class="radio-item"><input type="radio" name="cycle" /> 6+ months</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">7.5</span> Who are your main competitors and how do you typically position against them?</div>
+      <textarea class="q-input tall" placeholder="Competitor names and your winning argument vs each..."></textarea>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       SECTION 8 — GTM SUCCESS METRICS
+  ═════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">GTM Success Metrics</div>
+      <span class="section-tag tag-green">Alignment</span>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">8.1</span> How many qualified meetings per month is the minimum acceptable result?</div>
+      <textarea class="q-input short" placeholder="e.g. 10 meetings held per month, 80% show rate..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">8.2</span> What does a "qualified lead" mean to Newronium — your exact internal definition?</div>
+      <div class="q-hint">e.g. Has budget confirmed? Right company size? Specific job title? Pain identified on call?</div>
+      <textarea class="q-input tall" placeholder="Your exact definition of qualified..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">8.3</span> What happens after the GTM Engineer hands off a qualified lead — who takes it and what is the next step?</div>
+      <textarea class="q-input" placeholder="Internal process: who receives the lead, what happens next, who closes..."></textarea>
+    </div>
+
+    <div class="question">
+      <div class="q-label"><span class="q-num">8.4</span> Any other information, context, or constraints the GTM Engineer needs to know before starting?</div>
+      <textarea class="q-input tall" placeholder="Anything else relevant — internal politics, sensitive accounts to avoid, specific timing constraints..."></textarea>
+    </div>
+  </div>
+
+  <!-- ── SUBMIT ── -->
+  <div class="submit-block">
+    <h3>Thank you for completing this form.</h3>
+    <p>Once received, your GTM Engineer will build the ICP filter list, lookalike search, and first outreach sequences within 5 business days.</p>
+    <button class="submit-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <footer>
+    Newronium · Data & AI · GTM Onboarding Form · Confidential
+  </footer>
+
+</div>
+</body>
+</html>
