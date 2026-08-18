@@ -1,0 +1,516 @@
+
+<title>Workflow 4 Tools</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --bg: #F7F5F2;
+    --surface: #FFFFFF;
+    --surface-2: #EFEDE9;
+    --surface-3: #E6E3DE;
+    --accent: #D94A1A;
+    --accent-dim: rgba(217,74,26,0.09);
+    --text: #181512;
+    --text-muted: #6B6560;
+    --text-dim: #B0ABA5;
+    --border: #E2DED9;
+    --green: #1A7A4A;
+    --green-bg: rgba(26,122,74,0.09);
+    --yellow: #7A5F00;
+    --yellow-bg: rgba(122,95,0,0.09);
+    --blue: #1D4ED8;
+    --blue-bg: rgba(29,78,216,0.08);
+    --red: #B91C1C;
+    --red-bg: rgba(185,28,28,0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141210; --surface: #1C1916; --surface-2: #242018; --surface-3: #2C2820;
+      --accent: #F05A28; --accent-dim: rgba(240,90,40,0.12);
+      --text: #F0EDE8; --text-muted: #8A8480; --text-dim: #4A4540; --border: #2E2A24;
+      --green: #3DD68C; --green-bg: rgba(61,214,140,0.1);
+      --yellow: #F5C842; --yellow-bg: rgba(245,200,66,0.1);
+      --blue: #60A5FA; --blue-bg: rgba(96,165,250,0.1);
+      --red: #F87171; --red-bg: rgba(248,113,113,0.1);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #141210; --surface: #1C1916; --surface-2: #242018; --surface-3: #2C2820;
+    --accent: #F05A28; --accent-dim: rgba(240,90,40,0.12);
+    --text: #F0EDE8; --text-muted: #8A8480; --text-dim: #4A4540; --border: #2E2A24;
+    --green: #3DD68C; --green-bg: rgba(61,214,140,0.1);
+    --yellow: #F5C842; --yellow-bg: rgba(245,200,66,0.1);
+    --blue: #60A5FA; --blue-bg: rgba(96,165,250,0.1);
+    --red: #F87171; --red-bg: rgba(248,113,113,0.1);
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F7F5F2; --surface: #FFFFFF; --surface-2: #EFEDE9; --surface-3: #E6E3DE;
+    --accent: #D94A1A; --accent-dim: rgba(217,74,26,0.09);
+    --text: #181512; --text-muted: #6B6560; --text-dim: #B0ABA5; --border: #E2DED9;
+    --green: #1A7A4A; --green-bg: rgba(26,122,74,0.09);
+    --yellow: #7A5F00; --yellow-bg: rgba(122,95,0,0.09);
+    --blue: #1D4ED8; --blue-bg: rgba(29,78,216,0.08);
+    --red: #B91C1C; --red-bg: rgba(185,28,28,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    padding: 28px 16px 80px;
+    max-width: 740px;
+    margin: 0 auto;
+  }
+
+  header {
+    padding: 32px 0 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .eyebrow {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-size: 26px; font-weight: 700; line-height: 1.2;
+    color: var(--text); text-wrap: balance; margin-bottom: 10px;
+  }
+
+  header p { font-size: 14px; color: var(--text-muted); max-width: 560px; line-height: 1.6; }
+
+  section { margin-bottom: 28px; }
+
+  .section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .flow-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .flow-box.accent { background: var(--accent-dim); border-color: color-mix(in srgb, var(--accent) 30%, transparent); color: var(--accent); }
+
+  .flow-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .flow-arrow {
+    font-size: 16px;
+    color: var(--text-dim);
+    padding: 0 6px;
+    padding-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  /* WARNING */
+  .warning {
+    background: var(--red-bg);
+    border: 1px solid color-mix(in srgb, var(--red) 25%, transparent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .warning strong { color: var(--red); }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+
+  .step { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    flex-shrink: 0; width: 48px;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 16px;
+    font-family: "IBM Plex Mono", monospace; font-size: 13px; font-weight: 700;
+    color: var(--accent); border-right: 1px solid var(--border); background: var(--surface-2);
+  }
+
+  .step-body { flex: 1; padding: 14px 16px; background: var(--surface); }
+
+  .step-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+  .step-tool {
+    display: inline-block; background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 7px; font-size: 11px; font-family: "IBM Plex Mono", monospace;
+    color: var(--accent); font-weight: 600; margin-right: 4px; margin-bottom: 6px;
+  }
+
+  .step-detail { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+  .step-sub {
+    margin-top: 8px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+
+  .step-sub-row {
+    display: flex; gap: 10px; align-items: baseline;
+    font-size: 12.5px;
+  }
+
+  .sub-key {
+    flex-shrink: 0; font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+    font-weight: 600; color: var(--text-muted); min-width: 80px;
+  }
+
+  .sub-val { color: var(--text); line-height: 1.4; }
+
+  /* SEQUENCE TABLE */
+  .seq-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    display: block; overflow-x: auto;
+  }
+
+  .seq-table th {
+    text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);
+    border-bottom: 1px solid var(--border); background: var(--surface-2); white-space: nowrap;
+  }
+
+  .seq-table td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top; color: var(--text); background: var(--surface);
+  }
+
+  .seq-table tr:last-child td { border-bottom: none; }
+
+  /* STACK TABLE */
+  .stack-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    display: block; overflow-x: auto;
+  }
+
+  .stack-table th {
+    text-align: left; padding: 9px 14px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);
+    border-bottom: 1px solid var(--border); background: var(--surface-2); white-space: nowrap;
+  }
+
+  .stack-table td {
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
+    vertical-align: middle; background: var(--surface);
+  }
+
+  .stack-table tr:last-child td { border-bottom: none; }
+
+  .cost-free { color: var(--green); font-weight: 600; font-size: 12px; }
+  .cost-paid { color: var(--yellow); font-weight: 600; font-size: 12px; }
+  .cost-have { color: var(--blue); font-weight: 600; font-size: 12px; }
+
+  /* METRICS */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  @media (max-width: 500px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+  .metric-value { font-size: 22px; font-weight: 700; font-family: "IBM Plex Mono", monospace; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .metric-context { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+
+  .alert {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+    padding: 13px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.5;
+    margin-top: 14px;
+  }
+
+  .alert strong { color: var(--text); }
+
+  .tag {
+    display: inline-block; background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 7px; font-size: 11px;
+    font-family: "IBM Plex Mono", monospace; color: var(--text-muted); font-weight: 600;
+    margin: 1px 2px 1px 0;
+  }
+
+  h3 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+</style>
+
+<header>
+  <div class="eyebrow">GTM Workflow</div>
+  <h1>LinkedIn + Apollo + Claude + Dripify</h1>
+  <p>Workflow de outreach automático no LinkedIn com tracking externo de replies, calls e pipeline — e o que é realista esperar de cada etapa.</p>
+</header>
+
+<!-- FLOW -->
+<section>
+  <div class="section-label">Arquitetura do workflow</div>
+  <div class="flow">
+    <div class="flow-node">
+      <div class="flow-box accent">Apollo</div>
+      <div class="flow-label">Lista + URLs</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box accent">Claude</div>
+      <div class="flow-label">Mensagens batch</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box accent">Dripify</div>
+      <div class="flow-label">LinkedIn auto</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box">Make.com</div>
+      <div class="flow-label">Ligar tudo</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-box">Dashboard</div>
+      <div class="flow-label">Tracking externo</div>
+    </div>
+  </div>
+
+  <div class="warning">
+    <strong>Limitação importante:</strong> O LinkedIn não permite automação direta via código ou scripts — detecta e bana contas. Claude Code não interage com o LinkedIn diretamente. O Dripify simula comportamento humano (delays aleatórios, limites diários) para operar dentro das margens de segurança do LinkedIn.
+  </div>
+</section>
+
+<!-- STEPS -->
+<section>
+  <div class="section-label">Passos do workflow</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Apollo — construir lista com LinkedIn URLs</div>
+        <span class="step-tool">Apollo → Search → People</span>
+        <div class="step-detail">Exportar lista com os filtros do ICP (cargo, setor, tamanho, geografia). A coluna LinkedIn URL é exportada automaticamente para a maioria dos perfis. Salvar como CSV.</div>
+        <div class="step-sub">
+          <div class="step-sub-row"><span class="sub-key">Colunas:</span><span class="sub-val">Nome · Empresa · Cargo · LinkedIn URL · Email · Setor</span></div>
+          <div class="step-sub-row"><span class="sub-key">Volume:</span><span class="sub-val">50–100 leads por wave. Mais volume depois de validar o que funciona.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">Claude — gerar mensagens personalizadas em batch</div>
+        <span class="step-tool">Claude Code / claude.ai</span>
+        <div class="step-detail">Colar 20–30 linhas do CSV com 1 signal por lead (post recente, vaga aberta, notícia). Claude gera 3 mensagens por lead e devolve CSV pronto a importar no Dripify.</div>
+        <div class="step-sub">
+          <div class="step-sub-row"><span class="sub-key">Mensagem 1:</span><span class="sub-val">Nota de pedido de ligação — máx. 300 caracteres, personalizada com o signal</span></div>
+          <div class="step-sub-row"><span class="sub-key">Mensagem 2:</span><span class="sub-val">Day 1 após aceitação — introdução curta + proposta de valor em 2 frases</span></div>
+          <div class="step-sub-row"><span class="sub-key">Mensagem 3:</span><span class="sub-val">Day 7 sem resposta — follow-up com ângulo diferente ou caso de estudo</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Dripify — automatizar LinkedIn</div>
+        <span class="step-tool">Dripify</span>
+        <div class="step-detail">Importar CSV com as mensagens. O Dripify executa a sequência automaticamente, simulando comportamento humano com delays e limites diários seguros.</div>
+        <div style="margin-top:10px;border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+          <table class="seq-table">
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Ação automática</th>
+                <th>Limite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arranque</td>
+                <td>Pedido de ligação com nota personalizada</td>
+                <td style="font-size:12px;color:var(--text-muted);">20–30/dia</td>
+              </tr>
+              <tr>
+                <td>Aceite</td>
+                <td>Mensagem Day 1 — automática</td>
+                <td style="font-size:12px;color:var(--text-muted);">Imediato</td>
+              </tr>
+              <tr>
+                <td>Sem resposta (7 dias)</td>
+                <td>Mensagem Day 7 — follow-up</td>
+                <td style="font-size:12px;color:var(--text-muted);">Auto</td>
+              </tr>
+              <tr>
+                <td>Resposta recebida</td>
+                <td>Sequência para — notificação para ti</td>
+                <td style="font-size:12px;color:var(--text-muted);">Manual a partir daqui</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-title">Make.com — ligar Dripify ao tracking externo</div>
+        <span class="step-tool">Make.com</span>
+        <div class="step-detail">Quando o status de um lead muda no Dripify (pedido enviado, aceite, respondeu, sem resposta), Make.com atualiza automaticamente a Google Sheet ou o HubSpot — sem teres de exportar manualmente.</div>
+        <div class="step-sub">
+          <div class="step-sub-row"><span class="sub-key">Trigger:</span><span class="sub-val">Mudança de status no Dripify</span></div>
+          <div class="step-sub-row"><span class="sub-key">Ação:</span><span class="sub-val">Atualizar linha na Google Sheet + criar deal no HubSpot se "Respondeu"</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-title">Dashboard externo — gestão do pipeline</div>
+        <span class="step-tool">Google Sheets</span><span class="step-tool">HubSpot Free</span><span class="step-tool">Calendly</span>
+        <div class="step-detail">Visibilidade total do funil sem entrar no LinkedIn. Quando alguém responde, recebes notificação, vês o contexto no dashboard, e partilhas o link Calendly para marcar a call.</div>
+        <div class="step-sub">
+          <div class="step-sub-row"><span class="sub-key">Colunas:</span><span class="sub-val">Nome · Empresa · Cargo · Status · Data envio · Dias pendente · Observações</span></div>
+          <div class="step-sub-row"><span class="sub-key">Status:</span><span class="sub-val"><span class="tag">Pedido enviado</span><span class="tag">Aceite</span><span class="tag">Respondeu</span><span class="tag">Call marcada</span><span class="tag">Sem resposta</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section>
+  <div class="section-label">Stack completa — ferramentas e custos</div>
+  <div style="overflow-x:auto;">
+  <table class="stack-table">
+    <thead>
+      <tr>
+        <th>Ferramenta</th>
+        <th>Para quê</th>
+        <th>Custo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Apollo</td>
+        <td style="font-size:13px;color:var(--text-muted);">Lista de prospects + LinkedIn URLs + email sequences</td>
+        <td><span class="cost-have">Já tens</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Claude</td>
+        <td style="font-size:13px;color:var(--text-muted);">Personalização de mensagens em batch por signal</td>
+        <td><span class="cost-have">Já tens</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Dripify</td>
+        <td style="font-size:13px;color:var(--text-muted);">LinkedIn automation — pedidos de ligação + sequência de mensagens</td>
+        <td><span class="cost-paid">~€40/mês</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Make.com</td>
+        <td style="font-size:13px;color:var(--text-muted);">Ligar Dripify → Google Sheets / HubSpot automaticamente</td>
+        <td><span class="cost-paid">~€20/mês</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Google Sheets</td>
+        <td style="font-size:13px;color:var(--text-muted);">Dashboard de tracking do pipeline LinkedIn</td>
+        <td><span class="cost-free">Grátis</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">HubSpot Free</td>
+        <td style="font-size:13px;color:var(--text-muted);">Gestão de replies e calls quando há interesse real</td>
+        <td><span class="cost-free">Grátis</span></td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Calendly</td>
+        <td style="font-size:13px;color:var(--text-muted);">Link de marcação de call — partilhado quando alguém responde</td>
+        <td><span class="cost-free">Grátis</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="alert">
+    <strong>Dripify vs Expandi:</strong> Para arrancar agora, Dripify é a escolha certa — interface mais simples, integra com Make.com, ~€40/mês. Expandi (~€80/mês) é mais poderoso mas tem curva de aprendizagem maior. Migra quando o volume justificar.
+  </div>
+</section>
+
+<!-- BENCHMARKS -->
+<section>
+  <div class="section-label">Benchmarks realistas — 200 leads bem segmentados</div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Pedidos enviados</div>
+      <div class="metric-value">200</div>
+      <div class="metric-context">20–30/dia durante ~8 dias úteis</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Taxa de aceitação</div>
+      <div class="metric-value">25–40%</div>
+      <div class="metric-context">~50–80 ligações aceites</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Respostas recebidas</div>
+      <div class="metric-value">15–30%</div>
+      <div class="metric-context">dos que aceitaram → 8–24 replies</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Calls marcadas</div>
+      <div class="metric-value">6–10</div>
+      <div class="metric-context">3–8% do total de contactos</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Custo total/mês</div>
+      <div class="metric-value">~€60</div>
+      <div class="metric-context">Dripify €40 + Make.com €20</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Custo por call</div>
+      <div class="metric-value">€6–10</div>
+      <div class="metric-context">Excelente para B2B — benchmark do mercado é €30–80</div>
+    </div>
+  </div>
+  <div class="alert" style="margin-top:14px;">
+    <strong>Nota:</strong> 90–100% de resposta não existe em nenhum canal de cold outreach B2B. O que importa é o custo por call e o volume mensal de pipeline gerado. 6–10 calls qualificadas por mês com €60 de custo é um resultado excelente.
+  </div>
+</section>
