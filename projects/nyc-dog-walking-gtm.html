@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GTM Case Study: NYC Dog Walking Outreach — Inês Rodrigues Gouveia</title>
+<style>
+  :root{--bg:#f4f6f8;--card:#ffffff;--accent:#0b63b6;--accent-dark:#084a87;--muted:#6b7280;--line:#e5e9ef}
+  *{box-sizing:border-box}
+  body{font-family: Inter, Arial, sans-serif;background:var(--bg);margin:0;color:#111}
+  .container{max-width:900px;margin:32px auto;padding:20px}
+  a{color:var(--accent)}
+  .back{display:inline-block;margin-bottom:16px;font-size:14px;color:var(--muted);text-decoration:none}
+  .back:hover{color:var(--accent)}
+  header{background:linear-gradient(135deg,#0b63b6,#4a90d9);color:#fff;border-radius:10px;padding:32px;box-shadow:0 6px 18px rgba(13,26,40,0.10)}
+  header .tag{display:inline-block;background:rgba(255,255,255,0.15);padding:4px 10px;border-radius:999px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+  header h1{margin:0 0 8px;font-size:28px;line-height:1.25}
+  header p.lead{margin:0;opacity:.92;font-size:15px;max-width:640px}
+  .stat-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .stat{background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;min-width:130px}
+  .stat .num{font-size:18px;font-weight:700}
+  .stat .lbl{font-size:12px;opacity:.85}
+  .card{background:var(--card);border-radius:10px;padding:24px;margin-top:18px;box-shadow:0 6px 18px rgba(13,26,40,0.04)}
+  h2{margin-top:0;color:#0f1724;font-size:19px}
+  h3{color:#0f1724;font-size:15px;margin-bottom:6px}
+  p{line-height:1.55}
+  .meta{font-size:13px;color:var(--muted)}
+  ul{margin:6px 0 0;padding-left:20px;line-height:1.6}
+  ol{line-height:1.7}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f7f9fc;color:#374151;font-weight:600}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12.5px}
+  .msg{background:#f7f9fc;border-left:3px solid var(--accent);padding:12px 14px;border-radius:6px;margin-top:10px;font-size:13.5px;white-space:pre-wrap}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .badge{display:inline-block;background:#eef3fb;color:var(--accent);padding:3px 9px;border-radius:999px;font-size:12px;margin:2px 4px 2px 0}
+  .note{background:#fff8e6;border:1px solid #f2dd9f;border-radius:8px;padding:12px 14px;font-size:13.5px;margin-top:10px;color:#6b5510}
+  .phase{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+  .phase .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:6px;flex-shrink:0}
+  .phase.done .dot{background:#16a34a}
+  .phase.next .dot{background:#d1d5db}
+  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="../index.html">&larr; Back to portfolio</a>
+
+    <header>
+      <span class="tag">GTM / Growth Case Study</span>
+      <h1>Finding NYC Dog Owners and Turning Them Into Paying Dog-Walking Clients</h1>
+      <p class="lead">A self-directed go-to-market project: building an ICP-driven prospecting and outreach system in Clay to source local dog owners in New York City, enrich their contact info, and convert them into recurring dog-walking clients — designed and built as a practical demonstration of GTM/RevOps skills.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="num">Clay</div><div class="lbl">Core enrichment &amp; automation tool</div></div>
+        <div class="stat"><div class="num">1 ICP</div><div class="lbl">NYC dog owners, segmented by neighborhood</div></div>
+        <div class="stat"><div class="num">3-touch</div><div class="lbl">Personalized outreach sequence</div></div>
+        <div class="stat"><div class="num">Real business</div><div class="lbl">Built to generate real local income</div></div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>1. The idea</h2>
+      <p>Dog walking is a simple, recurring local service with real demand in NYC — busy professionals, small apartments with no yard, and doorman buildings full of dogs that need midday walks. Instead of relying on marketplaces like Rover or Wag (where I'd compete on price and have little control over who I work with), I treated this like a GTM problem: <strong>define an ideal customer, find where they already show intent, reach them directly and personally, and convert them into recurring clients.</strong></p>
+      <p>The project doubles as a portfolio piece: it's a compact, end-to-end example of the same muscles used in B2B GTM engineering — ICP definition, multi-source lead sourcing, waterfall enrichment, AI-assisted personalization at scale, and sequenced outreach — applied to a real, self-funded local business instead of a demo dataset.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Ideal Customer Profile (ICP)</h2>
+      <p>I scored prospects on how likely they are to <em>need and pay for</em> a recurring dog walker, not just "owns a dog":</p>
+      <table>
+        <tr><th>Signal</th><th>Why it matters</th><th>Weight</th></tr>
+        <tr><td>Lives in a doorman / high-rise building</td><td>No yard access → daily walk is non-negotiable</td><td>High</td></tr>
+        <tr><td>Posts about the dog being home alone / WFO schedule</td><td>Direct evidence of a midday-walk gap</td><td>High</td></tr>
+        <tr><td>Multiple dogs, or a high-energy breed (Lab, Husky, Aussie)</td><td>Higher willingness to pay for reliable exercise</td><td>Medium</td></tr>
+        <tr><td>Neighborhood within my serviceable radius</td><td>Logistics — I can't walk dogs 45 minutes away</td><td>Gating filter</td></tr>
+        <tr><td>Engages with local dog accounts/hashtags (not just a national brand)</td><td>Signals an active, local, findable owner</td><td>Medium</td></tr>
+        <tr><td>Left a review for a competitor (Rover/Wag/local walker)</td><td>Already pays for the service — proven demand</td><td>High</td></tr>
+      </table>
+      <p class="meta">Target neighborhoods (adjust to your own service radius): Upper West Side, Upper East Side, Chelsea, West Village, Williamsburg, Park Slope, Astoria.</p>
+    </section>
+
+    <section class="card">
+      <h2>3. Where the leads come from</h2>
+      <div class="grid2">
+        <div>
+          <h3>Public, intent-rich sources</h3>
+          <ul>
+            <li><strong>Instagram hashtags/locations</strong> — #nycdogs, #dogsofnyc, #uwsdogs, geotagged dog-run posts</li>
+            <li><strong>Google Maps reviews</strong> of nearby dog runs, pet stores, groomers, vets — reviewers are local dog owners by definition</li>
+            <li><strong>Yelp/Google reviews of competitors</strong> (Rover walkers, Wag, local pet-sitting services) — people already paying for the exact service</li>
+            <li><strong>Neighborhood Facebook groups &amp; Nextdoor</strong> — posts asking "does anyone know a reliable dog walker?"</li>
+            <li><strong>Meetup dog-owner groups</strong> in target neighborhoods</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Collection tools</h3>
+          <ul>
+            <li><strong>Phantombuster / Apify</strong> — scrape hashtag &amp; location posts, Google Maps reviewers, group members (public data only)</li>
+            <li><strong>Clay's native web &amp; Google Maps sources</strong> — pull places + reviews directly into a table</li>
+            <li>Manual seed list from my own IRL network (doormen, neighbors, cafés) — often the highest-converting source and worth its own table</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">Only public data is collected (public posts, public reviews, public group posts) and outreach always includes a easy opt-out. No scraping of private profiles or gated content, no bulk unsolicited "spam" messaging — every message is written to be personalized and relevant, at small local volume, not blasted.</div>
+    </section>
+
+    <section class="card">
+      <h2>4. The Clay table architecture</h2>
+      <p>One Clay table per source (Instagram, Maps reviewers, Facebook groups), each normalized to the same schema and merged into a master "Prospects" table. Columns, left to right:</p>
+      <table>
+        <tr><th>Column</th><th>Type</th><th>What it does</th></tr>
+        <tr><td><code>full_name</code></td><td>Source data</td><td>Name as captured from the source</td></tr>
+        <tr><td><code>source_channel</code></td><td>Source data</td><td>Instagram / Google Maps / Facebook Group / Referral</td></tr>
+        <tr><td><code>source_url</code></td><td>Source data</td><td>Link to the original post/review for traceability</td></tr>
+        <tr><td><code>evidence_text</code></td><td>Source data</td><td>The actual post/review text — raw material for personalization</td></tr>
+        <tr><td><code>neighborhood</code></td><td>AI (Claygent / LLM column)</td><td>Extracts or infers neighborhood from bio/geotag/review location</td></tr>
+        <tr><td><code>has_dog_confidence</code></td><td>AI (LLM column)</td><td>Classifies evidence_text: Confirmed dog owner / Likely / Unclear — filters out noise</td></tr>
+        <tr><td><code>dog_breed_mentioned</code></td><td>AI (LLM column)</td><td>Extracts breed/name of dog if mentioned, used in personalization</td></tr>
+        <tr><td><code>icp_fit_score</code></td><td>AI (LLM column)</td><td>Scores 1–5 against the ICP table in §2 (doorman building, WFO gap, multi-dog, etc.)</td></tr>
+        <tr><td><code>email</code></td><td>Enrichment waterfall</td><td>Waterfall: Clay Email Finder → Prospeo → Anymail Finder → skip if no match</td></tr>
+        <tr><td><code>email_verified</code></td><td>Enrichment</td><td>Deliverability check before sending (avoid bounces hurting sender reputation)</td></tr>
+        <tr><td><code>phone_or_ig_handle</code></td><td>Enrichment / source</td><td>Best available direct-contact channel when email isn't found</td></tr>
+        <tr><td><code>best_channel</code></td><td>Formula/AI</td><td>Decision: Email if verified, else Instagram DM, else skip</td></tr>
+        <tr><td><code>personalized_hook</code></td><td>AI (LLM column)</td><td>1-sentence hook generated from evidence_text + dog_breed_mentioned (e.g. "saw Max the husky's 6am zoomies post")</td></tr>
+        <tr><td><code>outreach_message</code></td><td>AI (LLM column)</td><td>Full drafted DM/email using the template in §5, inserting the hook</td></tr>
+        <tr><td><code>status</code></td><td>Manual/Workflow</td><td>New → Sent → Replied → Trial Booked → Client → Not Interested</td></tr>
+      </table>
+      <p class="meta">The AI columns are prompt-based (Claygent or a connected LLM step) with strict instructions to only use facts present in <code>evidence_text</code> — no invented details, since the whole point is that the message is credibly personal.</p>
+    </section>
+
+    <section class="card">
+      <h2>5. Outreach sequence</h2>
+      <p>Short, human, low-pressure — the goal of message 1 is a reply, not a sale.</p>
+      <h3>Touch 1 — Day 0 (Instagram DM or email)</h3>
+      <div class="msg">Hi {{first_name}}! I saw {{personalized_hook}} 🐾 I'm Inês — I live in {{neighborhood}} and walk dogs for a few local families here. If {{dog_name_or_"your pup"}} ever needs a reliable midday walk, I'd love to introduce myself. No pressure either way — happy to send my rates if useful!</div>
+
+      <h3>Touch 2 — Day 3, if no reply</h3>
+      <div class="msg">Hey {{first_name}}, just following up in case this got buried! I offer a free first walk so you (and {{dog_name_or_"your pup"}}) can see if it's a good fit before committing to anything. Let me know if that's ever useful 🙂</div>
+
+      <h3>Touch 3 — Day 7, break-up message</h3>
+      <div class="msg">No worries if now isn't the right time — I'll leave it here! If you ever need a walker (or know a neighbor who does), feel free to reach out anytime. Have a great one, {{first_name}} 🐶</div>
+
+      <div class="note">Sequence stops immediately on any reply and routes to a manual conversation — the goal past this point is a real conversation, not more automation.</div>
+    </section>
+
+    <section class="card">
+      <h2>6. Offer &amp; conversion funnel</h2>
+      <div class="grid2">
+        <div>
+          <h3>Offer</h3>
+          <ul>
+            <li>Free 20-min trial walk — removes risk, lets the dog (and owner) meet me first</li>
+            <li>Single walk: $28–32 (in line with/slightly below marketplace rates, no platform fee)</li>
+            <li>Weekly package (3–5x/week): discounted per-walk rate, billed monthly</li>
+            <li>Direct relationship — same walker every time, texted photo updates, no app fee</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Funnel</h3>
+          <ol>
+            <li>DM/email sent (personalized)</li>
+            <li>Reply → short chat about the dog's routine</li>
+            <li>Free trial walk booked (Calendly link)</li>
+            <li>Trial walk → photo/video update sent same day (trust-building)</li>
+            <li>Convert to recurring package</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>7. Stack</h2>
+      <span class="badge">Clay — sourcing, enrichment, AI personalization</span>
+      <span class="badge">Phantombuster / Apify — public data collection</span>
+      <span class="badge">Instagram DM / Gmail — outreach send</span>
+      <span class="badge">Calendly — trial walk booking</span>
+      <span class="badge">Google Sheets / Notion — lightweight CRM</span>
+      <span class="badge">Venmo / Stripe — payment</span>
+    </section>
+
+    <section class="card">
+      <h2>8. Funnel model (planning assumptions)</h2>
+      <p class="meta">These are the benchmark assumptions used to size the effort and decide how many leads to source per week — not reported results from a live campaign.</p>
+      <table>
+        <tr><th>Stage</th><th>Volume</th><th>Assumed rate</th></tr>
+        <tr><td>Leads sourced / week</td><td>120</td><td>—</td></tr>
+        <tr><td>Pass ICP filter (icp_fit_score ≥ 4)</td><td>~45</td><td>~35%</td></tr>
+        <tr><td>Contact info found (email or IG)</td><td>~30</td><td>~65% match</td></tr>
+        <tr><td>Reply</td><td>~5</td><td>~15% reply rate</td></tr>
+        <tr><td>Trial walk booked</td><td>~2</td><td>~40% of replies</td></tr>
+        <tr><td>Converts to recurring client</td><td>~1–2</td><td>~60–70% of trials</td></tr>
+      </table>
+      <p>At that rate, 1–2 new recurring clients per week is enough to build a small, dependable local client base within 2–3 months without ever paying a marketplace commission.</p>
+    </section>
+
+    <section class="card">
+      <h2>9. Status</h2>
+      <div class="phase done"><div class="dot"></div><div><strong>Phase 1 — Done:</strong> ICP defined, sourcing channels mapped, Clay table schema and enrichment waterfall designed, outreach sequence and copy written.</div></div>
+      <div class="phase next"><div class="dot"></div><div><strong>Phase 2 — Next:</strong> Build the live Clay table, run a first small batch (20–30 prospects) in one neighborhood, measure actual reply/booking rates against the model in §8, iterate on messaging.</div></div>
+      <div class="phase next"><div class="dot"></div><div><strong>Phase 3 — Next:</strong> Once repeatable, template the table so it can be re-run neighborhood by neighborhood as capacity allows.</div></div>
+    </section>
+
+    <section class="card">
+      <h2>10. What this demonstrates</h2>
+      <ul>
+        <li><strong>ICP design</strong> — turning a vague "dog owners" audience into a scored, prioritized target list</li>
+        <li><strong>Multi-source lead sourcing</strong> — combining scraping, maps data, and community platforms</li>
+        <li><strong>Enrichment waterfalls</strong> — sequencing multiple providers to maximize match rate without overpaying</li>
+        <li><strong>AI-assisted personalization at scale</strong> — LLM columns that generate grounded, non-generic outreach hooks</li>
+        <li><strong>Funnel &amp; unit-economics thinking</strong> — sizing effort against expected conversion, not just "send more messages"</li>
+        <li><strong>Compliance-aware growth</strong> — public data only, opt-outs, no spam at volume</li>
+      </ul>
+      <p>Same building blocks used for B2B GTM engineering (Clay tables, waterfall enrichment, AI personalization, sequenced outreach) — applied here to a real, self-funded local service business.</p>
+    </section>
+
+    <footer>
+      <p><a href="../index.html">&larr; Back to portfolio</a> · Questions about the build? <a href="mailto:inesgouveia06@gmail.com">inesgouveia06@gmail.com</a></p>
+    </footer>
+  </div>
+</body>
+</html>
