@@ -1,5 +1,7 @@
 # Prospecting Clay with Clay: 3 campaigns, 1 workbook
 
+> **Update:** the current plan is in [`TODAY.md`](TODAY.md): one short list of 6–8 people on the NY sales side, with a coffee ask. This guide is kept for reference.
+
 **Goal:** get each of your 3 NY applications in front of a real human at Clay with proof of work. Track it like a pipeline.
 
 | Campaign | Proof asset | Who to reach (3–5 people max) |
